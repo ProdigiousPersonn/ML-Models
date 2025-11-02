@@ -31,8 +31,15 @@ int main()
     fmt::print("Multiply:\n");
     printMatrix(multiplyMatrix(m1, m2));
 
-    fmt::print("Eliminate m3:\n");
-    printMatrix(gaussianElimination(m3).matrix);
+    fmt::print("REF of m3:\n");
+    EliminationResult m3_elim = forwardElimination(m3);
+    printMatrix(m3_elim.matrix);
+
+    fmt::print("RREF of m3:\n"); // Prints diagonal matrix with 1s and 0s duh idk what im doing
+    printMatrix(backwardElimination(m3_elim.matrix).matrix);
+
+    fmt::print("Inverse of m3:\n");
+    printMatrix(inverse(m3));
 
     fmt::print("Determinant m3:\n");
     fmt::print("{}\n", determinant(m3));

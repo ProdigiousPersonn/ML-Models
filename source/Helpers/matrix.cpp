@@ -8,15 +8,18 @@ using Matrix = std::vector<Vector>;
 
 struct EliminationResult {
     Matrix matrix;
+    Matrix augmented;
     int swaps;
 };
 
 void printMatrix(Matrix m) {
-    for (std::vector<double> row : m) {
+    std::cout << std::fixed << std::setprecision(2); 
+
+    for (const auto& row : m) {
         for (double val : row) {
-            fmt::print("{} ", val);
+            std::cout << std::setw(8) << val << " "; 
         }
-        fmt::print("\n");
+        std::cout << "\n";
     }
 }
 
@@ -66,62 +69,178 @@ Matrix multiplyMatrix(Matrix m1, Matrix m2) {
     return result;
 }
 
-EliminationResult gaussianElimination(Matrix m) {
+EliminationResult forwardElimination(Matrix m, Matrix aug = Matrix()) {
     if (m.empty() || m[0].empty()) { 
-        return {m, 0};
+        return {m, aug, 0};
     }
 
     int m_rows = m.size();
     int m_cols = m[0].size();
 
-    Matrix u = m;
-    Matrix identity(m_rows, Vector(m_cols));
+    bool is_augmented = !(aug.empty() || aug[0].empty());
+    if (is_augmented) {
+        if (m_rows != static_cast<int>(aug.size())) {
+             throw std::invalid_argument("Augmented matrix row count must match input matrix row count.");
+        }
+    }
+
+    Matrix m_c = m;
+    Matrix aug_c = aug;
 
     int pivot_row = 0;
     int swaps = 0;
 
     for (int j = 0; j < m_cols && pivot_row < m_rows; j++) { // Condition means loop thru cols until we run out of rows to eliminate
         int max_row_ind = pivot_row;
-        double max_val = std::abs(u[pivot_row][j]); 
+        double max_val = std::abs(m_c[pivot_row][j]); 
 
         // Track > val in column for swap
         for (int i = pivot_row + 1; i < m_rows; i++) { // Start at pivot_row so prevent unecessary checks
-            if (std::abs(u[i][j]) > max_val) {
-                max_val = std::abs(u[i][j]); 
+            if (std::abs(m_c[i][j]) > max_val) {
+                max_val = std::abs(m_c[i][j]); 
                 max_row_ind = i;
             }
         }
 
         // Rows w/ greatest vals at col are on top
         if (max_row_ind != pivot_row) {
-            std::swap(u[pivot_row], u[max_row_ind]);
+            std::swap(m_c[pivot_row], m_c[max_row_ind]);
+            if (is_augmented) {
+                std::swap(aug_c[pivot_row], aug_c[max_row_ind]);
+            }
             swaps++;
         }
 
         // Prevent super large #s (1/0.000000001 super big), also floating pt errors :/ 
-        if (std::abs(u[pivot_row][j]) < 1e-9) {
-            u[pivot_row][j] = 0.0;
+        if (std::abs(m_c[pivot_row][j]) < 1e-9) {
+            m_c[pivot_row][j] = 0.0;
             continue;
         }
 
-        double pivot = u[pivot_row][j];
+        double pivot = m_c[pivot_row][j];
 
         // Do subtraction 
         for (int i = pivot_row + 1; i < m_rows; i++) {
-            double target = u[i][j]; // Element we want to be 0
+            double target = m_c[i][j]; // Element we want to be 0
             double c = target / pivot; // Provides coefficient for subtraction
 
             for (int z = j; z < m_cols; z++) {
-                u[i][z] -= u[pivot_row][z] * c;
+                m_c[i][z] -= m_c[pivot_row][z] * c;
             }
 
-            u[i][j] = 0.0;
+            if (is_augmented) {
+                for (int z = 0; z < static_cast<int>(aug_c[0].size()); z++) {
+                    aug_c[i][z] -= aug_c[pivot_row][z] * c;
+                }
+            }
+
+            m_c[i][j] = 0.0;
         }
 
         pivot_row++;
     }
 
-    return {u, swaps};
+    return {m_c, aug_c, swaps};
+}
+
+EliminationResult backwardElimination(Matrix m, Matrix aug = Matrix()) {
+    if (m.empty() || m[0].empty()) { 
+        return {m, aug, 0};
+    }
+
+    int m_rows = m.size();
+    int m_cols = m[0].size();
+
+    bool is_augmented = !aug.empty();
+    int aug_cols = 0;
+    if (is_augmented) {
+        if (m_rows != static_cast<int>(aug.size())) {
+             throw std::invalid_argument("Augmented matrix row count must match input matrix row count.");
+        }
+        if (!aug.empty() && !aug[0].empty()) {
+            aug_cols = aug[0].size();
+        }
+    }
+
+    Matrix m_c = m;
+    Matrix aug_c = aug;
+
+    for (int i = m_rows - 1; i >= 0; i--) {
+        
+        // Get pivot
+        int pivot_col = -1;
+        for (int j = 0; j < m_cols; j++) {
+            if (std::abs(m_c[i][j]) > 1e-9) {
+                pivot_col = j;
+                break;
+            }
+        }
+
+        if (pivot_col == -1) {
+            continue;
+        }
+
+        // Normalize pivot row 
+        double pivot_val = m_c[i][pivot_col];
+        
+        for (int j = pivot_col; j < m_cols; j++) {
+            m_c[i][j] /= pivot_val;
+        }
+        if (is_augmented) {
+            for (int j = 0; j < aug_cols; j++) {
+                aug_c[i][j] /= pivot_val;
+            }
+        }
+        m_c[i][pivot_col] = 1.0; 
+
+        // Eliminate all elements above pivot
+        for (int k = i - 1; k >= 0; k--) {
+            double target_val = m_c[k][pivot_col];
+            
+            for (int j = pivot_col; j < m_cols; j++) {
+                m_c[k][j] -= target_val * m_c[i][j];
+            }
+
+            if (is_augmented) {
+                for (int j = 0; j < aug_cols; j++) {
+                    aug_c[k][j] -= target_val * aug_c[i][j];
+                }
+            }
+            m_c[k][pivot_col] = 0.0;
+        }
+    }
+
+    return {m_c, aug_c, 0};
+}
+
+Matrix inverse(Matrix m) {
+    if (m.empty()) {
+        throw std::invalid_argument("Cannot invert an empty matrix.");
+    }
+
+    int m_rows = m.size();
+    int m_cols = m[0].size();
+
+    if (m_rows != m_cols) {
+        throw std::invalid_argument("Cannot invert a non-square matrix.");
+    }
+
+    Matrix identity(m_rows, Vector(m_rows, 0.0));
+    for (int i = 0; i < m_rows; i++) {
+        identity[i][i] = 1.0;
+    }
+
+    EliminationResult forward_result = forwardElimination(m, identity);
+
+    for (int i = 0; i < m_rows; i++) { // Check if diagonal entry is 0
+        if (std::abs(forward_result.matrix[i][i]) < 1e-9) {
+            throw std::runtime_error("Matrix is singular and cannot be inverted.");
+        }
+    }
+
+    EliminationResult backward_result = backwardElimination(forward_result.matrix, forward_result.augmented);
+
+    return backward_result.augmented;
 }
 
 double determinant(Matrix m) {
@@ -144,7 +263,7 @@ double determinant(Matrix m) {
         return m[0][0] * m[1][1] - m[1][0] * m[0][1];
     } 
 
-    EliminationResult elim_result = gaussianElimination(m);
+    EliminationResult elim_result = forwardElimination(m);
 
     double det = 1.0;
     for (int i = 0; i < m_rows; i++) {
