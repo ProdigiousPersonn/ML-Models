@@ -70,31 +70,44 @@ LinearModel/
 
 ## Roadmap
 
-### Traditional ML
-- [x] Linear regression
-- [ ] Logistic regression
-- [ ] Decision trees
-- [ ] Random forests
-- [ ] K-means clustering
-- [ ] Support Vector Machines
-- [ ] K-Nearest Neighbors
+# Regression
+- [x] **Linear Regression**
+- [ ] **Evaluation Metrics (Regression):** MSE, MAE, RMSE, R-squared
+- [ ] **Regularization:** L1 (Lasso) & L2 (Ridge)
 
-### Deep Learning
-- [ ] Neural networks (feedforward)
-- [ ] Backpropagation
-- [ ] Convolutional Neural Networks
-- [ ] Recurrent Neural Networks
-- [ ] Transformers
-- [ ] Embeddings (Word2Vec, GloVe)
-- [ ] Attention mechanisms
-- [ ] Language models (basic LLM architecture)
+# Classification
+- [ ] **Logistic Regression**
+- [ ] **Evaluation Metrics (Classification):**
+    - [ ] Confusion Matri
+    - [ ] Accuracy, Precision, Recall, F1-Score
+    - [ ] ROC Curve and AUC
+- [ ] **K-Nearest Neighbors (KNN)**
+- [ ] **Support Vector Machines (SVMs)**
 
-### Optimization & Tools
-- [ ] Mini-batch gradient descent
-- [ ] Adam optimizer
-- [ ] Data normalization
-- [ ] Cross-validation
-- [ ] Model serialization
+# Tree-Based Models
+- [ ] **Decision Trees**
+- [ ] **Random Forests**
+
+# Unsupervised Learning
+- [ ] **K-Means Clustering**
+
+# Deep Learning Foundations
+- [ ] **Neural Networks (Feedforward)**
+- [ ] **Backpropagation**
+- [ ] **Optimizers:**
+    - [ ] **Mini-Batch Gradient Descent**
+    - [ ] **Adam Optimizer**
+- [ ] **Model Serialization**
+
+# DL Architectures
+- [ ] **Convolutional Neural Networks (CNNs)** (For images)
+- [ ] **Recurrent Neural Networks (RNNs)** (For sequences)
+
+# Modern NLP (Language)
+- [ ] **Embeddings (Word2Vec, GloVe)**
+- [ ] **Attention Mechanisms**
+- [ ] **Transformers**
+- [ ] **Language Models (Basic LLM architecture)**
 
 ## License
 
