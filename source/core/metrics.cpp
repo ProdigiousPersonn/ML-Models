@@ -33,9 +33,6 @@ double R2Metric::compute(const Matrix& y_pred, const Matrix& y_true) const
 
 double AdjustedR2Metric::compute(const Matrix& y_pred, const Matrix& y_true) const
 {
-    const double rows = y_pred.rows();
-    const double cols = y_pred.cols();
-
     R2Metric r2;
     double R2_val = r2.compute(y_true, y_pred);
     int n = y_true.rows();

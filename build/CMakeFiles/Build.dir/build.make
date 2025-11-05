@@ -142,10 +142,24 @@ CMakeFiles/Build.dir/source/core/regularizer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Build.dir/source/core/regularizer.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/atran/Documents/Projects/LinearModel/source/core/regularizer.cpp -o CMakeFiles/Build.dir/source/core/regularizer.cpp.s
 
+CMakeFiles/Build.dir/source/core/metrics.cpp.o: CMakeFiles/Build.dir/flags.make
+CMakeFiles/Build.dir/source/core/metrics.cpp.o: /home/atran/Documents/Projects/LinearModel/source/core/metrics.cpp
+CMakeFiles/Build.dir/source/core/metrics.cpp.o: CMakeFiles/Build.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/atran/Documents/Projects/LinearModel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Build.dir/source/core/metrics.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Build.dir/source/core/metrics.cpp.o -MF CMakeFiles/Build.dir/source/core/metrics.cpp.o.d -o CMakeFiles/Build.dir/source/core/metrics.cpp.o -c /home/atran/Documents/Projects/LinearModel/source/core/metrics.cpp
+
+CMakeFiles/Build.dir/source/core/metrics.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Build.dir/source/core/metrics.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/atran/Documents/Projects/LinearModel/source/core/metrics.cpp > CMakeFiles/Build.dir/source/core/metrics.cpp.i
+
+CMakeFiles/Build.dir/source/core/metrics.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Build.dir/source/core/metrics.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/atran/Documents/Projects/LinearModel/source/core/metrics.cpp -o CMakeFiles/Build.dir/source/core/metrics.cpp.s
+
 CMakeFiles/Build.dir/source/models/linear-regression.cpp.o: CMakeFiles/Build.dir/flags.make
 CMakeFiles/Build.dir/source/models/linear-regression.cpp.o: /home/atran/Documents/Projects/LinearModel/source/models/linear-regression.cpp
 CMakeFiles/Build.dir/source/models/linear-regression.cpp.o: CMakeFiles/Build.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/atran/Documents/Projects/LinearModel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Build.dir/source/models/linear-regression.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/atran/Documents/Projects/LinearModel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Build.dir/source/models/linear-regression.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Build.dir/source/models/linear-regression.cpp.o -MF CMakeFiles/Build.dir/source/models/linear-regression.cpp.o.d -o CMakeFiles/Build.dir/source/models/linear-regression.cpp.o -c /home/atran/Documents/Projects/LinearModel/source/models/linear-regression.cpp
 
 CMakeFiles/Build.dir/source/models/linear-regression.cpp.i: cmake_force
@@ -156,10 +170,24 @@ CMakeFiles/Build.dir/source/models/linear-regression.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Build.dir/source/models/linear-regression.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/atran/Documents/Projects/LinearModel/source/models/linear-regression.cpp -o CMakeFiles/Build.dir/source/models/linear-regression.cpp.s
 
+CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.o: CMakeFiles/Build.dir/flags.make
+CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.o: /home/atran/Documents/Projects/LinearModel/examples/linear-regression/housing/housing-example.cpp
+CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.o: CMakeFiles/Build.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/atran/Documents/Projects/LinearModel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.o -MF CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.o.d -o CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.o -c /home/atran/Documents/Projects/LinearModel/examples/linear-regression/housing/housing-example.cpp
+
+CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/atran/Documents/Projects/LinearModel/examples/linear-regression/housing/housing-example.cpp > CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.i
+
+CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/atran/Documents/Projects/LinearModel/examples/linear-regression/housing/housing-example.cpp -o CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.s
+
 CMakeFiles/Build.dir/tests/math/matrix-test.cpp.o: CMakeFiles/Build.dir/flags.make
 CMakeFiles/Build.dir/tests/math/matrix-test.cpp.o: /home/atran/Documents/Projects/LinearModel/tests/math/matrix-test.cpp
 CMakeFiles/Build.dir/tests/math/matrix-test.cpp.o: CMakeFiles/Build.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/atran/Documents/Projects/LinearModel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Build.dir/tests/math/matrix-test.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/atran/Documents/Projects/LinearModel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Build.dir/tests/math/matrix-test.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Build.dir/tests/math/matrix-test.cpp.o -MF CMakeFiles/Build.dir/tests/math/matrix-test.cpp.o.d -o CMakeFiles/Build.dir/tests/math/matrix-test.cpp.o -c /home/atran/Documents/Projects/LinearModel/tests/math/matrix-test.cpp
 
 CMakeFiles/Build.dir/tests/math/matrix-test.cpp.i: cmake_force
@@ -173,7 +201,7 @@ CMakeFiles/Build.dir/tests/math/matrix-test.cpp.s: cmake_force
 CMakeFiles/Build.dir/tests/models/linear-regression-test.cpp.o: CMakeFiles/Build.dir/flags.make
 CMakeFiles/Build.dir/tests/models/linear-regression-test.cpp.o: /home/atran/Documents/Projects/LinearModel/tests/models/linear-regression-test.cpp
 CMakeFiles/Build.dir/tests/models/linear-regression-test.cpp.o: CMakeFiles/Build.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/atran/Documents/Projects/LinearModel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Build.dir/tests/models/linear-regression-test.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/atran/Documents/Projects/LinearModel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Build.dir/tests/models/linear-regression-test.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Build.dir/tests/models/linear-regression-test.cpp.o -MF CMakeFiles/Build.dir/tests/models/linear-regression-test.cpp.o.d -o CMakeFiles/Build.dir/tests/models/linear-regression-test.cpp.o -c /home/atran/Documents/Projects/LinearModel/tests/models/linear-regression-test.cpp
 
 CMakeFiles/Build.dir/tests/models/linear-regression-test.cpp.i: cmake_force
@@ -187,7 +215,7 @@ CMakeFiles/Build.dir/tests/models/linear-regression-test.cpp.s: cmake_force
 CMakeFiles/Build.dir/source/additional-sourcefile.cpp.o: CMakeFiles/Build.dir/flags.make
 CMakeFiles/Build.dir/source/additional-sourcefile.cpp.o: /home/atran/Documents/Projects/LinearModel/source/additional-sourcefile.cpp
 CMakeFiles/Build.dir/source/additional-sourcefile.cpp.o: CMakeFiles/Build.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/atran/Documents/Projects/LinearModel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Build.dir/source/additional-sourcefile.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/atran/Documents/Projects/LinearModel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Build.dir/source/additional-sourcefile.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Build.dir/source/additional-sourcefile.cpp.o -MF CMakeFiles/Build.dir/source/additional-sourcefile.cpp.o.d -o CMakeFiles/Build.dir/source/additional-sourcefile.cpp.o -c /home/atran/Documents/Projects/LinearModel/source/additional-sourcefile.cpp
 
 CMakeFiles/Build.dir/source/additional-sourcefile.cpp.i: cmake_force
@@ -205,7 +233,9 @@ Build_OBJECTS = \
 "CMakeFiles/Build.dir/source/core/loss.cpp.o" \
 "CMakeFiles/Build.dir/source/core/optimizer.cpp.o" \
 "CMakeFiles/Build.dir/source/core/regularizer.cpp.o" \
+"CMakeFiles/Build.dir/source/core/metrics.cpp.o" \
 "CMakeFiles/Build.dir/source/models/linear-regression.cpp.o" \
+"CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.o" \
 "CMakeFiles/Build.dir/tests/math/matrix-test.cpp.o" \
 "CMakeFiles/Build.dir/tests/models/linear-regression-test.cpp.o" \
 "CMakeFiles/Build.dir/source/additional-sourcefile.cpp.o"
@@ -218,7 +248,9 @@ Build: CMakeFiles/Build.dir/source/math/matrix.cpp.o
 Build: CMakeFiles/Build.dir/source/core/loss.cpp.o
 Build: CMakeFiles/Build.dir/source/core/optimizer.cpp.o
 Build: CMakeFiles/Build.dir/source/core/regularizer.cpp.o
+Build: CMakeFiles/Build.dir/source/core/metrics.cpp.o
 Build: CMakeFiles/Build.dir/source/models/linear-regression.cpp.o
+Build: CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.o
 Build: CMakeFiles/Build.dir/tests/math/matrix-test.cpp.o
 Build: CMakeFiles/Build.dir/tests/models/linear-regression-test.cpp.o
 Build: CMakeFiles/Build.dir/source/additional-sourcefile.cpp.o
@@ -227,7 +259,7 @@ Build: CMakeFiles/Build.dir/compiler_depend.ts
 Build: external/fmt/libfmt.a
 Build: external/spdlog/libspdlog.a
 Build: CMakeFiles/Build.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/atran/Documents/Projects/LinearModel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable Build"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/atran/Documents/Projects/LinearModel/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable Build"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Build.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

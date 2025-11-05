@@ -177,4 +177,5 @@ CMakeFiles/Build.dir/source/main.cpp.o: \
  /usr/include/c++/15/bits/locale_facets_nonio.tcc \
  /usr/include/c++/15/bits/locale_conv.h \
  /usr/include/c++/15/bits/quoted_string.h /usr/include/c++/15/sstream \
- /usr/include/c++/15/bits/sstream.tcc
+ /usr/include/c++/15/bits/sstream.tcc \
+ /home/atran/Documents/Projects/LinearModel/examples/linear-regression/housing/housing-example.h

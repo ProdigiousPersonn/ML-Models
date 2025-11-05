@@ -633,6 +633,30 @@ successtest/fast:
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/successtest.dir/build.make tests/CMakeFiles/successtest.dir/build
 .PHONY : successtest/fast
 
+examples/linear-regression/housing/housing-example.o: examples/linear-regression/housing/housing-example.cpp.o
+.PHONY : examples/linear-regression/housing/housing-example.o
+
+# target to build an object file
+examples/linear-regression/housing/housing-example.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Build.dir/build.make CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.o
+.PHONY : examples/linear-regression/housing/housing-example.cpp.o
+
+examples/linear-regression/housing/housing-example.i: examples/linear-regression/housing/housing-example.cpp.i
+.PHONY : examples/linear-regression/housing/housing-example.i
+
+# target to preprocess a source file
+examples/linear-regression/housing/housing-example.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Build.dir/build.make CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.i
+.PHONY : examples/linear-regression/housing/housing-example.cpp.i
+
+examples/linear-regression/housing/housing-example.s: examples/linear-regression/housing/housing-example.cpp.s
+.PHONY : examples/linear-regression/housing/housing-example.s
+
+# target to generate assembly for a file
+examples/linear-regression/housing/housing-example.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Build.dir/build.make CMakeFiles/Build.dir/examples/linear-regression/housing/housing-example.cpp.s
+.PHONY : examples/linear-regression/housing/housing-example.cpp.s
+
 source/additional-sourcefile.o: source/additional-sourcefile.cpp.o
 .PHONY : source/additional-sourcefile.o
 
@@ -680,6 +704,30 @@ source/core/loss.s: source/core/loss.cpp.s
 source/core/loss.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Build.dir/build.make CMakeFiles/Build.dir/source/core/loss.cpp.s
 .PHONY : source/core/loss.cpp.s
+
+source/core/metrics.o: source/core/metrics.cpp.o
+.PHONY : source/core/metrics.o
+
+# target to build an object file
+source/core/metrics.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Build.dir/build.make CMakeFiles/Build.dir/source/core/metrics.cpp.o
+.PHONY : source/core/metrics.cpp.o
+
+source/core/metrics.i: source/core/metrics.cpp.i
+.PHONY : source/core/metrics.i
+
+# target to preprocess a source file
+source/core/metrics.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Build.dir/build.make CMakeFiles/Build.dir/source/core/metrics.cpp.i
+.PHONY : source/core/metrics.cpp.i
+
+source/core/metrics.s: source/core/metrics.cpp.s
+.PHONY : source/core/metrics.s
+
+# target to generate assembly for a file
+source/core/metrics.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Build.dir/build.make CMakeFiles/Build.dir/source/core/metrics.cpp.s
+.PHONY : source/core/metrics.cpp.s
 
 source/core/optimizer.o: source/core/optimizer.cpp.o
 .PHONY : source/core/optimizer.o
@@ -922,12 +970,18 @@ help:
 	@echo "... fmt"
 	@echo "... spdlog"
 	@echo "... successtest"
+	@echo "... examples/linear-regression/housing/housing-example.o"
+	@echo "... examples/linear-regression/housing/housing-example.i"
+	@echo "... examples/linear-regression/housing/housing-example.s"
 	@echo "... source/additional-sourcefile.o"
 	@echo "... source/additional-sourcefile.i"
 	@echo "... source/additional-sourcefile.s"
 	@echo "... source/core/loss.o"
 	@echo "... source/core/loss.i"
 	@echo "... source/core/loss.s"
+	@echo "... source/core/metrics.o"
+	@echo "... source/core/metrics.i"
+	@echo "... source/core/metrics.s"
 	@echo "... source/core/optimizer.o"
 	@echo "... source/core/optimizer.i"
 	@echo "... source/core/optimizer.s"

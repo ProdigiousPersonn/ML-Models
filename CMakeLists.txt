@@ -102,15 +102,19 @@ add_executable(Build
     source/core/loss.cpp
     source/core/optimizer.cpp
     source/core/regularizer.cpp
+    source/core/metrics.cpp
     source/models/linear-regression.cpp
+    examples/linear-regression/housing/housing-example.cpp
     tests/math/matrix-test.cpp
     tests/models/linear-regression-test.cpp
     include/ml_lib/math/matrix.h
     include/ml_lib/core/loss.h
     include/ml_lib/core/optimizer.h
     include/ml_lib/core/regularizer.h
+    include/ml_lib/core/metrics.h
     include/ml_lib/models/base-model.h
     include/ml_lib/models/linear-regression.h
+    examples/linear-regression/housing/housing-example.h
 )
 
 target_include_directories(Build
@@ -118,6 +122,7 @@ target_include_directories(Build
         ${CMAKE_CURRENT_LIST_DIR}/source
         ${CMAKE_CURRENT_LIST_DIR}/include
         ${CMAKE_CURRENT_LIST_DIR}/tests
+        ${CMAKE_CURRENT_LIST_DIR}/examples/linear-regression/housing
 )
 
 target_link_libraries(Build
