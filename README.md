@@ -6,7 +6,10 @@ A C++ machine learning library built from the ground up. Implementing various ML
 
 - Linear regression with gradient descent optimization
 - Matrix operations library (addition, multiplication, transpose, inverse)
-- L1, L2, MSE, MAE, RMSE cost functions
+- Loss functions: MSE, MAE, RMSE, L1, L2
+- Evaluation metrics: R2, Adjusted R2, MSE, MAE, RMSE
+- Regularization: L1 (Lasso) & L2 (Ridge)
+- Housing price prediction example with real-world dataset
 
 ## Prerequisites
 
@@ -63,9 +66,34 @@ cmake --build . --config Release
 LinearModel/
 ├── source/
 │   ├── main.cpp           # Entry point
-│   └── Helpers/           # Core implementations
-├── external/              # Dependencies (fmt, spdlog)
+│   ├── math/              # Matrix operations
+│   ├── core/              # Loss, optimizer, regularizer, metrics
+│   └── models/            # ML model implementations
+├── include/
+│   └── ml_lib/            # Public headers
+├── examples/
+│   └── linear-regression/
+│       └── housing/       # Housing price prediction example
+├── tests/                 # Unit tests
+├── external/              # Dependencies (fmt, spdlog, doctest)
 └── CMakeLists.txt        # Build configuration
+```
+
+## Examples
+
+### Housing Price Prediction
+
+A complete example demonstrating linear regression on a real-world housing dataset (https://www.kaggle.com/datasets/yasserh/housing-prices-dataset):
+
+- Dataset: 545 housing samples with 12 features (area, bedrooms, bathrooms, etc.)
+- Features: Z-score normalization
+- Model: Linear regression with L2 regularization
+- Optimizer: Batch gradient descent
+- Metrics: MSE, RMSE, MAE, R²
+
+Run the example:
+```bash
+./Build
 ```
 
 ## Roadmap
