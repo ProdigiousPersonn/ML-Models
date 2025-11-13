@@ -127,7 +127,7 @@ Run the examples:
 - [x] **Evaluation Metrics (Classification):**
     - [x] Accuracy, Precision, Recall, FPR, F1-Score
     - [X] Confusion Matrix
-    - [ ] ROC Curve and AUC
+    - [X] ROC Curve and AUC
 - [ ] **K-Nearest Neighbors (KNN)**
 - [ ] **Support Vector Machines (SVMs)**
 
