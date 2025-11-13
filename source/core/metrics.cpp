@@ -1,13 +1,15 @@
 #include "ml_lib/core/metrics.h"
 #include <cmath>
 
-double R2Metric::compute(const Matrix& y_pred, const Matrix& y_true) const
+namespace metrics {
+
+double r2(const Matrix& y_true, const Matrix& y_pred)
 {
     const double rows = y_pred.rows();
     const double cols = y_pred.cols();
 
-    double SSres = 0.0; // Residual sum of squares
-    double SStot = 0.0; // Total sum of squares
+    double SSres = 0.0; // Residual
+    double SStot = 0.0; // Total
 
     double mean = 0.0;
     for (int i = 0; i < rows; i++) {
@@ -31,16 +33,15 @@ double R2Metric::compute(const Matrix& y_pred, const Matrix& y_true) const
     return 1 - (SSres/SStot);
 }
 
-double AdjustedR2Metric::compute(const Matrix& y_pred, const Matrix& y_true) const
+double adjustedR2(const Matrix& y_true, const Matrix& y_pred, int num_predictors)
 {
-    R2Metric r2;
-    double R2_val = r2.compute(y_true, y_pred);
+    double r2_val = r2(y_true, y_pred);
     int n = y_true.rows();
 
-    return 1 - (1 - R2_val) * ((n - 1)/(n - k - 1));
+    return 1 - (1 - r2_val) * ((n - 1) / (n - num_predictors - 1));
 }
 
-double MSEMetric::compute(const Matrix& y_pred, const Matrix& y_true) const
+double mse(const Matrix& y_true, const Matrix& y_pred)
 {
     double result = 0.0;
     int n = y_pred.rows() * y_pred.cols();
@@ -57,25 +58,12 @@ double MSEMetric::compute(const Matrix& y_pred, const Matrix& y_true) const
     return result / n;
 }
 
-double RMSEMetric::compute(const Matrix& y_pred, const Matrix& y_true) const
+double rmse(const Matrix& y_true, const Matrix& y_pred)
 {
-    double result = 0.0;
-    int n = y_pred.rows() * y_pred.cols();
-    if (n == 0) {
-        return 0.0;
-    }
-
-    for (int i = 0; i < y_pred.rows(); i++) {
-        for (int j = 0; j < y_pred.cols(); j++) {
-            double diff = y_pred(i, j) - y_true(i, j);
-            result += diff * diff;
-        }
-    }
-
-    return sqrt(result / n);
+    return sqrt(mse(y_true, y_pred));
 }
 
-double MAEMetric::compute(const Matrix& y_pred, const Matrix& y_true) const
+double mae(const Matrix& y_true, const Matrix& y_pred)
 {
     double result = 0.0;
     int n = y_pred.rows() * y_pred.cols();
@@ -91,8 +79,7 @@ double MAEMetric::compute(const Matrix& y_pred, const Matrix& y_true) const
     return result / n;
 }
 
-
-Matrix ConfusionMatrix::compute(const Matrix &y_true, const Matrix &y_pred) const
+Matrix confusionMatrix(const Matrix& y_true, const Matrix& y_pred)
 {
     Matrix confusion = Matrix(2, 2, 0);
     for (int i = 0; i < y_pred.rows(); i++) {
@@ -118,34 +105,7 @@ Matrix ConfusionMatrix::compute(const Matrix &y_true, const Matrix &y_pred) cons
     return confusion;
 }
 
-ROCResult ROCCurve::compute(const Matrix &y_true, const Matrix &y_pred, const double resolution) const {
-    ROCResult result;
-
-    ConfusionMatrix confusionMatrix;
-    RecallMetric recallMetric;
-    FPRMetric fprMetric;
-
-    for (double threshold = 0.0; threshold <= 1.0; threshold += resolution) {
-        Matrix y_pred_thresholded = Matrix(y_pred.rows(), y_pred.cols(), 0.0);
-        for (int i = 0; i < y_pred.rows(); i++) {
-            for (int j = 0; j < y_pred.cols(); j++) {
-                y_pred_thresholded(i, j) = (y_pred(i, j) >= threshold) ? 1.0 : 0.0;
-            }
-        }
-
-        Matrix confusion = confusionMatrix.compute(y_true, y_pred_thresholded);
-
-        double tpr = recallMetric.compute(confusion);
-        double fpr = fprMetric.compute(confusion);
-
-        result.TPR.push_back(tpr);
-        result.FPR.push_back(fpr);
-    }
-
-    return result;
-}
-
-double AccuracyMetric::compute(const Matrix& confusion) const
+double accuracy(const Matrix& confusion)
 {
     int TP = confusion(0, 0);
     int TN = confusion(1, 1);
@@ -159,7 +119,7 @@ double AccuracyMetric::compute(const Matrix& confusion) const
     return static_cast<double>(TP + TN) / total;
 }
 
-double PrecisionMetric::compute(const Matrix& confusion) const
+double precision(const Matrix& confusion)
 {
     int TP = confusion(0, 0);
     int FP = confusion(1, 0);
@@ -170,7 +130,7 @@ double PrecisionMetric::compute(const Matrix& confusion) const
     return static_cast<double>(TP) / (TP + FP);
 }
 
-double RecallMetric::compute(const Matrix& confusion) const
+double recall(const Matrix& confusion)
 {
     int TP = confusion(0, 0);
     int FN = confusion(0, 1);
@@ -181,7 +141,7 @@ double RecallMetric::compute(const Matrix& confusion) const
     return static_cast<double>(TP) / (TP + FN);
 }
 
-double FPRMetric::compute(const Matrix& confusion) const
+double fpr(const Matrix& confusion)
 {
     int TN = confusion(1, 1);
     int FP = confusion(1, 0);
@@ -192,51 +152,50 @@ double FPRMetric::compute(const Matrix& confusion) const
     return static_cast<double>(FP) / (FP + TN);
 }
 
-double F1ScoreMetric::compute(const Matrix& confusion) const
+double f1Score(const Matrix& confusion)
 {
-    RecallMetric recallMetric;
-    PrecisionMetric precisionMetric;
+    double recall_val = recall(confusion);
+    double precision_val = precision(confusion);
 
-    double recall = recallMetric.RecallMetric::compute(confusion);
-    double precision = precisionMetric.PrecisionMetric::compute(confusion);
-
-    if (precision + recall == 0.0) {
+    if (precision_val + recall_val == 0.0) {
         return 0.0;
     }
-    return 2.0 * (precision * recall) / (precision + recall);
+    return 2.0 * (precision_val * recall_val) / (precision_val + recall_val);
 }
 
-
-Metric* createMetric(MetricType type)
+ROCResult rocCurve(const Matrix& y_true, const Matrix& y_pred, double resolution)
 {
-    switch (type) {
-        case MetricType::MAE:
-            return new MAEMetric();
-        case MetricType::MSE:
-            return new MSEMetric();
-        case MetricType::RMSE:
-            return new RMSEMetric();
-        case MetricType::R2:
-            return new R2Metric();
-        case MetricType::AdjustedR2:
-            return new AdjustedR2Metric(0);
-        default:
-            return nullptr;
+    ROCResult result;
+
+    for (double threshold = 1.0; threshold >= 0; threshold -= resolution) {
+        Matrix y_predThresholded = Matrix(y_pred.rows(), y_pred.cols(), 0.0);
+        for (int i = 0; i < y_pred.rows(); i++) {
+            for (int j = 0; j < y_pred.cols(); j++) {
+                y_predThresholded(i, j) = (y_pred(i, j) >= threshold) ? 1.0 : 0.0;
+            }
+        }
+
+        Matrix confusion = confusionMatrix(y_true, y_predThresholded);
+
+        double tpr = recall(confusion);
+        double fpr_val = fpr(confusion);
+
+        result.TPR.push_back(tpr);
+        result.FPR.push_back(fpr_val);
     }
+
+    result.AUC = auc(result);
+
+    return result;
 }
 
-ClassificationMetric* createClassificationMetric(MetricType type)
+double auc(const ROCResult& roc_result)
 {
-    switch (type) {
-        case MetricType::Accuracy:
-            return new AccuracyMetric();
-        case MetricType::Precision:
-            return new PrecisionMetric();
-        case MetricType::Recall:
-            return new RecallMetric();
-        case MetricType::F1:
-            return new F1ScoreMetric();
-        default:
-            return nullptr;
+    double area = 0;
+    for (size_t i = 1; i < roc_result.FPR.size(); i++) {
+        area += (roc_result.TPR[i] + roc_result.TPR[i-1]) / 2.0 * (roc_result.FPR[i] - roc_result.FPR[i - 1]);
     }
+    return area;
+}
+
 }

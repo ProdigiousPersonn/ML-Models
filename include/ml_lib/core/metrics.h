@@ -1,94 +1,30 @@
 #pragma once
 #include "../math/matrix.h"
+#include <vector>
 
-enum class MetricType {
-    // Linear
-    R2,
-    AdjustedR2,
-    MSE,
-    RMSE,
-    MAE,
-    // Logistic
-    Confusion,
-    Accuracy,
-    Precision,
-    Recall,
-    F1
-};
+namespace metrics {
 
+    struct ROCResult {
+        std::vector<double> TPR;
+        std::vector<double> FPR;
+        double AUC;
+    };
 
-class Metric {
-    public:
-        virtual double compute(const Matrix& y_true, const Matrix& y_pred) const = 0;
-        virtual ~Metric() {}
-};
+    double r2(const Matrix& y_true, const Matrix& y_pred);
+    double adjustedR2(const Matrix& y_true, const Matrix& y_pred, int num_predictors);
+    double mse(const Matrix& y_true, const Matrix& y_pred);
+    double rmse(const Matrix& y_true, const Matrix& y_pred);
+    double mae(const Matrix& y_true, const Matrix& y_pred);
 
-class R2Metric : public Metric { 
-    public:
-        virtual double compute(const Matrix& y_true, const Matrix& y_pred) const override;
-};
-class AdjustedR2Metric : public Metric {
-    private:
-        int k;
-    public:
-        AdjustedR2Metric(int predictors) : k(predictors) {}
-        virtual double compute(const Matrix& y_true, const Matrix& y_pred) const override; 
-};
-class MSEMetric : public Metric {
-    public:
-        virtual double compute(const Matrix& y_true, const Matrix& y_pred) const override; 
-};
-class RMSEMetric : public Metric {
-    public:
-        virtual double compute(const Matrix& y_true, const Matrix& y_pred) const override; 
-};
-class MAEMetric : public Metric {
-    public:
-        virtual double compute(const Matrix& y_true, const Matrix& y_pred) const override; 
-};
+    Matrix confusionMatrix(const Matrix& y_true, const Matrix& y_pred);
 
+    double accuracy(const Matrix& confusion);
+    double precision(const Matrix& confusion);
+    double recall(const Matrix& confusion);
+    double fpr(const Matrix& confusion);
+    double f1Score(const Matrix& confusion);
 
-class ConfusionMatrix{
-    public:
-        Matrix compute(const Matrix& y_true, const Matrix& y_pred) const;
-};
+    ROCResult rocCurve(const Matrix& y_true, const Matrix& y_pred, double resolution = 0.01);
+    double auc(const ROCResult& roc_result);
 
-class ClassificationMetric {
-    public:
-        virtual double compute(const Matrix& confusion) const = 0;
-        virtual ~ClassificationMetric() {}
-};
-
-struct ROCResult {
-    std::vector<double> TPR;
-    std::vector<double> FPR;
-};
-
-class ROCCurve {
-    public:
-        ROCResult compute(const Matrix& y_true, const Matrix& y_pred, const double resolution = 0.01) const;
-};
-
-class AccuracyMetric : public ClassificationMetric {
-    public:
-        virtual double compute(const Matrix& confusion) const override;
-};
-class PrecisionMetric : public ClassificationMetric {
-    public:
-        virtual double compute(const Matrix& confusion) const override;
-};
-class RecallMetric : public ClassificationMetric {
-    public:
-        virtual double compute(const Matrix& confusion) const override;
-};
-class FPRMetric : public ClassificationMetric {
-    public:
-        virtual double compute(const Matrix& confusion) const override;
-};
-class F1ScoreMetric : public ClassificationMetric {
-    public:
-        virtual double compute(const Matrix& confusion) const override;
-};
-
-Metric* createMetric(MetricType type);
-ClassificationMetric* createClassificationMetric(MetricType type);
+}

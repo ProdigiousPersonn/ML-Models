@@ -185,11 +185,6 @@ int runHousingExample() {
         createRegularizer(RegularizerType::L2, 0.01)
     );
 
-    R2Metric r2_metric;
-    MSEMetric mse_metric;
-    RMSEMetric rmse_metric;
-    MAEMetric mae_metric;
-
     fmt::print("{:-<60}\n", "");
     fmt::print("Training Progress:\n");
     fmt::print("{:-<60}\n", "");
@@ -203,7 +198,7 @@ int runHousingExample() {
 
         if (epoch % 100 == 0 || epoch == epochs - 1) {
             fmt::print("Epoch {:4d}: Loss = {:.6f}, R² = {:.4f}\n",
-                      epoch, loss, r2_metric.compute(y_pred, y_train));
+                      epoch, loss, metrics::r2(y_train, y_pred));
         }
     }
 
@@ -212,20 +207,20 @@ int runHousingExample() {
     fmt::print("{:-<60}\n", "");
     Matrix y_train_pred = model.forward(X_train);
 
-    fmt::print("MSE:  {:.4f} (million²)\n", mse_metric.compute(y_train_pred, y_train));
-    fmt::print("RMSE: {:.4f} million\n", rmse_metric.compute(y_train_pred, y_train));
-    fmt::print("MAE:  {:.4f} million\n", mae_metric.compute(y_train_pred, y_train));
-    fmt::print("R^2:   {:.4f}\n", r2_metric.compute(y_train_pred, y_train));
+    fmt::print("MSE:  {:.4f} (million²)\n", metrics::mse(y_train, y_train_pred));
+    fmt::print("RMSE: {:.4f} million\n", metrics::rmse(y_train, y_train_pred));
+    fmt::print("MAE:  {:.4f} million\n", metrics::mae(y_train, y_train_pred));
+    fmt::print("R^2:   {:.4f}\n", metrics::r2(y_train, y_train_pred));
 
     fmt::print("\n{:-<60}\n", "");
     fmt::print("Test Set Metrics:\n");
     fmt::print("{:-<60}\n", "");
     Matrix y_test_pred = model.forward(X_test);
 
-    fmt::print("MSE:  {:.4f} (million²)\n", mse_metric.compute(y_test_pred, y_test));
-    fmt::print("RMSE: {:.4f} million\n", rmse_metric.compute(y_test_pred, y_test));
-    fmt::print("MAE:  {:.4f} million\n", mae_metric.compute(y_test_pred, y_test));
-    fmt::print("R^2:   {:.4f}\n", r2_metric.compute(y_test_pred, y_test));
+    fmt::print("MSE:  {:.4f} (million²)\n", metrics::mse(y_test, y_test_pred));
+    fmt::print("RMSE: {:.4f} million\n", metrics::rmse(y_test, y_test_pred));
+    fmt::print("MAE:  {:.4f} million\n", metrics::mae(y_test, y_test_pred));
+    fmt::print("R^2:   {:.4f}\n", metrics::r2(y_test, y_test_pred));
 
     fmt::print("\n{:-<60}\n", "");
     fmt::print("Sample Predictions (Test Set - First 10):\n");
