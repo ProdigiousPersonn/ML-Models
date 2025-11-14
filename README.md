@@ -6,11 +6,12 @@ A C++ machine learning library built from the ground up. Implementing various ML
 
 - **Linear regression** with gradient descent optimization
 - **Logistic regression** for binary classification
+- **K-Nearest Neighbors (KNN)** for classification
 - Matrix operations library (addition, multiplication, transpose, inverse)
 - Loss functions: MSE, MAE, RMSE, L1, L2, Binary Cross-Entropy (BCE)
 - Evaluation metrics:
   - Regression: R2, Adjusted R2, MSE, MAE, RMSE
-  - Classification: Accuracy, Precision, Recall, F1 Score
+  - Classification: Accuracy, Precision, Recall, F1 Score, Confusion Matrix, ROC Curve, AUC
 - Regularization: L1 (Lasso) & L2 (Ridge)
 - Real-world examples:
   - Housing price prediction (Linear Regression)
@@ -104,11 +105,11 @@ A binary classification example using logistic regression on the Framingham Hear
 
 - Dataset: Framingham Heart Study - 10 Year CHD Risk
 - Features: 15 clinical features (age, sex, cholesterol, blood pressure, BMI, etc.)
-- Preprocessing: Z-scoreBCE normalization
+- Preprocessing: Z-score normalization
 - Model: Logistic regression with L2 regularization
 - Loss: Binary Cross-Entropy (BCE)
 - Optimizer: Batch gradient descent
-- Metrics: Accuracy, Precision, Recall, F1 Score
+- Metrics: Accuracy, Precision, Recall, F1 Score, Confusion Matrix, ROC Curve, AUC
 
 Run the examples:
 ```bash
@@ -128,7 +129,7 @@ Run the examples:
     - [x] Accuracy, Precision, Recall, FPR, F1-Score
     - [X] Confusion Matrix
     - [X] ROC Curve and AUC
-- [ ] **K-Nearest Neighbors (KNN)**
+- [X] **K-Nearest Neighbors (KNN)**
 - [ ] **Support Vector Machines (SVMs)**
 
 ### Tree-Based Models [ ]
